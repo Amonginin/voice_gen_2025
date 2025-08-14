@@ -1,0 +1,55 @@
+# Pipeline configuration for AISumerCamp_audio_generation_fight
+
+runtime:
+  device: cpu            # auto | cpu | cuda
+  sample_rate: 16000
+  num_workers: 6          # for CPU-bound scoring tasks
+  output_dir: result
+  tmp_dir: .cache/tmp_audio
+  log_every: 5
+  seeds: [0, 1]        # number of candidates per utt (use different seeds)
+
+data:
+  tasks_csv: aigc_speech_generation_tasks/aigc_speech_generation_tasks.csv
+  base_dir: .
+
+generators:
+  use_f5_tts: true
+  use_xtts: false         # optional, can be enabled if XTTS is installed
+  f5_tts:
+    model: F5TTS_v1_Base
+    hf_endpoint: https://hf-mirror.com   # set empty to disable
+    ref_text_from_asr: true              # transcribe reference to use as ref_text
+    extra_args: ""                       # extra CLI flags if needed
+  xtts:
+    model_name: xtts_v2
+    gpu: true
+
+postprocess:
+  enabled: true
+  lufs_target: -22.0
+  add_noise_dbfs: -35.0   # e.g., -35 dBFS Gaussian noise; set null to disable
+  highpass_hz: 150        # set null to disable
+  lowpass_hz: 8000        # set null to disable
+
+scoring:
+  asr:
+    enabled: true
+    model_size: small     # tiny|base|small|medium|large (CPU-friendly: small)
+    language: zh
+  speaker:
+    enabled: true
+    model_hub: speechbrain/spkrec-ecapa-voxceleb
+  antispoof:
+    enabled: false        # set true on GPU server if model available
+    model_hub: null
+  weights:
+    speaker: 0.45
+    asr: 0.35             # applied to (1 - CER)
+    antispoof: 0.20       # applied to (1 - spoof_score); ignored if disabled
+
+export:
+  make_zip: true
+  zip_name: result.zip
+
+

@@ -1,0 +1,31 @@
+# Core
+torch>=2.3.0
+torchaudio>=2.3.0
+numpy>=1.26.0
+# Pin pandas for TTS compatibility on Py3.11 (TTS<0.23 requires pandas<2)
+pandas==1.5.3
+soundfile>=0.12.1
+librosa>=0.10.1
+numba>=0.58.0
+
+# TTS models (optional toggle via config)
+f5-tts>=0.1.0
+# XTTS (Coqui TTS) is optional and often fails to build on Windows without MSVC.
+# If you need XTTS on GPU server, install from requirements-gpu.txt instead.
+edge-tts>=6.1.9
+pyttsx3>=2.90
+
+# Scoring
+speechbrain>=0.5.16
+faster-whisper>=1.0.0
+jiwer>=3.0.3
+
+# Post-process
+pyloudnorm>=0.1.1
+pyroomacoustics>=0.7.4
+
+# Utilities
+PyYAML>=6.0.1
+tqdm>=4.66.2
+
+

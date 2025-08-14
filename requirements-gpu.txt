@@ -1,0 +1,28 @@
+# Use this on Ubuntu + NVIDIA + CUDA 12.1 server
+# Install torch/torchaudio with CUDA wheels first, then:
+
+# Core
+numpy>=1.26.0
+pandas>=2.1.0
+soundfile>=0.12.1
+librosa>=0.10.1
+numba>=0.58.0
+pyloudnorm>=0.1.1
+pyroomacoustics>=0.7.4
+PyYAML>=6.0.1
+
+# Scoring
+speechbrain>=0.5.16
+faster-whisper>=1.0.0
+jiwer>=3.0.3
+
+# Generators
+f5-tts>=0.1.0
+TTS>=0.22.0
+edge-tts>=6.1.9
+pyttsx3>=2.90
+
+# tqdm
+tqdm>=4.66.2
+
+
