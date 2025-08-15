@@ -4,6 +4,7 @@ runtime:
   device: cpu            # auto | cpu | cuda
   sample_rate: 16000
   num_workers: 6          # for CPU-bound scoring tasks
+  max_workers: 6          # for parallel processing (new)
   output_dir: result
   tmp_dir: .cache/tmp_audio
   log_every: 5
